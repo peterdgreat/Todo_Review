@@ -6,6 +6,7 @@ body {
   justify-content: center;
   height: 100vh;
   color: #515151;
+  filter: blur(4px);
 }
 
 .bg {

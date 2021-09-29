@@ -33,7 +33,7 @@ export default class Tasks {
         const input = document.createElement('input');
         input.type = 'checkbox';
         input.checked = task.completed;
-        if (task.completed === true) {
+        if (task.completed) {
           li.classList.add('completed');
           li.classList.remove('bg-col');
         } else {
@@ -43,7 +43,7 @@ export default class Tasks {
         input.addEventListener('change', () => {
           task.completed = input.checked;
           new Tasks().statusChanges(li);
-          if (task.completed === true) {
+          if (task.completed) {
             li.classList.add('completed');
           }
           Tasks.setLocal();
@@ -61,13 +61,12 @@ export default class Tasks {
 
         li.classList.add('d-flex', 'justify-content-between', 'border-m', 'align-items-center', 'text-center', 'descr');
 
-        li.addEventListener('click', () => {
+        li.addEventListener('dblclick', () => {
           // edit task off selected id
           li.classList.add('bg-col');
           description.classList.add('desc');
+          // edit one task
           Tasks.editTask(task.index);
-
-          // remove class edit
           more.innerText = 'delete';
           more.addEventListener('click', () => {
             // delete selected item from dom
@@ -76,6 +75,7 @@ export default class Tasks {
             Tasks.setLocal();
           });
         });
+
         ul.appendChild(li);
       });
     }
